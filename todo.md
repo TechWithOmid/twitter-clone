@@ -29,5 +29,5 @@
 Next Steps:
 - Large File Uploads for Images ~ Dive into AWS
 - Notifications
-- Direct Messages / Private Inboxes ~ Chat x Channels
+- Direct Messages / Private Inboxes ~ use channels for chat
 - Explore -> parse & filter for hashtags
