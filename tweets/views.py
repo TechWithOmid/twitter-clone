@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Tweet
 
 
@@ -28,7 +29,7 @@ def tweet_detail_view(request, tweet_id):
     try:
         obj = Tweet.objects.get(id=tweet_id)
         data['content'] = obj.content
-    except:
+    except ObjectDoesNotExist:
         data['message'] = "Not Found"
         status = 404
 
