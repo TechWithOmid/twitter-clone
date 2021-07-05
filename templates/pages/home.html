@@ -4,7 +4,7 @@
 <h1>Recent Tweets</h1>
 
 <div id='tweets'>
-    test
+    Loading...
 </div>
 
 <script>
@@ -14,17 +14,35 @@
     const responseType = 'json'
     const tweetsElement = document.getElementById('tweets')
 
+    function handleDidLike(tweet_id, currentCount){
+        console.log(tweet_id, currentCount)
+    }
+
+    function LikeBtn(tweet){
+        return `<button class='btn btn-primary' onclick=handleDidLike(${tweet.id},${tweet.likes})>Like</button>`
+    }
+
+    function formatTweetElement(tweet){
+        let formatedTweet = `
+            <div class='mb-4 tweet' id='tweet-${tweet.id}'>
+            <h3>${tweet.content}</h3>
+            ${LikeBtn(tweet)}
+            </div>
+            `
+        return formatedTweet
+    }
+
     xhr.responseType = responseType
     xhr.open(method, url)
     xhr.onload = function(){
         server_response = xhr.response
         let listedItems = server_response.response
-        console.log(listedItems)
 
         let finalTweetStr = ""
         for (let i=0; i<listedItems.length; i++){
-            finalTweetStr += `<h1>${listedItems[i].content}</h1>`
-            console.log(listedItems[i].content)
+            let tweetObj = listedItems[i]
+            let currentItem = formatTweetElement(tweetObj)
+            finalTweetStr += currentItem
         }
         tweetsElement.innerHTML=finalTweetStr
     }
