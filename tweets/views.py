@@ -7,7 +7,7 @@ from .forms import TweetForm
 from .models import Tweet
 
 
-allowed_hosts = settings.ALLOWED_HOSTS
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 
 def home_view(request, *args, **kwargs):
@@ -21,7 +21,7 @@ def tweet_create_view(request, *args, **kwargs):
         obj = form.save(commit=False)
         # do other form related logic
         obj.save()
-        if next_url != None and is_safe_url(next_url, allowed_hosts):
+        if next_url != None and is_safe_url(next_url, ALLOWED_HOSTS):
             return redirect(next_url)
         form = TweetForm()
     return render(request, "components/form.html", context={'form': form})
